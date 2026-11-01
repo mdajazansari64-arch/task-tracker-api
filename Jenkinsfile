@@ -42,7 +42,7 @@ pipeline {
                     usernameVariable: 'DOCKERHUB_USERNAME',
                     passwordVariable: 'DOCKERHUB_PASSWORD'
                 )]) {
-                    bat 'docker login -u %DOCKERHUB_USERNAME% -p %DOCKER_PASSWORD%'
+                    bat 'echo %DOCKERHUB_PASSWORD% | docker login -u %DOCKERHUB_USERNAME% --password-stdin'
                     bat 'docker push ajazaj/task-tracker-api:%BUILD_NUMBER%'
                     bat 'docker push ajazaj/task-tracker-api:latest'
                 }
