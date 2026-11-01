@@ -39,10 +39,10 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(
                     credentialsId: 'docker-credentials',
-                    usernameVariable: 'DOCKERHUB_USER',
+                    usernameVariable: 'DOCKERHUB_USERNAME',
                     passwordVariable: 'DOCKERHUB_PASSWORD'
                 )]) {
-                    bat 'echo %DOCKERHUB_PASSWORD% | docker login -u %DOCKERHUB_USER% --password-stdin'
+                    bat 'docker login -u %DOCKERHUB_USERNAME% -p %DOCKER_PASSWORD%'
                     bat 'docker push ajazaj/task-tracker-api:%BUILD_NUMBER%'
                     bat 'docker push ajazaj/task-tracker-api:latest'
                 }
