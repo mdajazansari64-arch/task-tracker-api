@@ -38,7 +38,7 @@ pipeline {
         stage('Push') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-pat-new',
+                    credentialsId: 'docker-credentials',
                     usernameVariable: 'DOCKERHUB_USER',
                     passwordVariable: 'DOCKERHUB_PASSWORD'
                 )]) {
