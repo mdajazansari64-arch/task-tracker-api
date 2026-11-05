@@ -48,6 +48,14 @@ pipeline {
                 }
             }
         }
+
+        stage('Kubernetes Access Test') {
+            steps {
+                withEnv(['KUBECONFIG=C:/ProgramData/Jenkins/.kube/config']) {
+                    bat 'kubectl get nodes'
+                }
+            }
+        }
     }
 
     post {
