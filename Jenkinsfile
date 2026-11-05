@@ -56,6 +56,15 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                withEnv(['KUBECONFIG=C:/ProgramData/Jenkins/.kube/config']) {
+                    bat 'kubectl set image deployment/task-tracker-api task-tracker-api=ajazaj/task-tracker-api:%BUILD_NUMBER%'
+                    bat 'kubectl rollout status deployment/task-tracker-api --timeout=120s'
+                }
+            }
+        }
     }
 
     post {
